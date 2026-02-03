@@ -2,6 +2,7 @@ package com.kalam.patientservice.service;
 
 import com.kalam.patientservice.dto.PatientRequestDTO;
 import com.kalam.patientservice.dto.PatientResponseDTO;
+import com.kalam.patientservice.exception.EmailAlreadyExistsException;
 import com.kalam.patientservice.mapper.PatientMapper;
 import com.kalam.patientservice.model.Patient;
 import com.kalam.patientservice.repository.PatientRepository;
@@ -29,8 +30,11 @@ public class PatientService {
         return patients.stream().map(PatientMapper::toDTO).toList();
     }
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
-        Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDTO)); //to save this data tupe should be "Patient"
+        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
+            throw new EmailAlreadyExistsException("This email is already exists" + patientRequestDTO.getEmail());
+        }
 
+        Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDTO)); //to save this data tupe should be "Patient"
         return PatientMapper.toDTO(newPatient);
     }
 }

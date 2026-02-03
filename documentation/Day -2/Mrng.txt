@@ -1,0 +1,11 @@
+now lets build custom exception -- prvsly we were made ex over @valid now lets make our own ex
+
+like for email to be unique
+-- how can we achive this to get this we have to when there is new email was about to entre we have to check DB for already existing for email
+--where to write the checking logic????????
+--logic always written in service layers..
+
+so in the servce layer before creating a newPatient we have to check if this email alread in use,
+for that we can use JpaRepository -- this guys writes code for us
+
+now to use our friend we have to mention the methodi in the impl classS

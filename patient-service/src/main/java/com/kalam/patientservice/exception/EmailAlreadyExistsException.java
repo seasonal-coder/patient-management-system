@@ -1,7 +1,7 @@
 package com.kalam.patientservice.exception;
 
-public class EmailAlreadyExistsException extends RuntimeException {
-  public EmailAlreadyExistsException(String message) {
-    super(message);
-  }
+public class EmailAlreadyExistsException extends RuntimeException{
+    public EmailAlreadyExistsException(String message) {
+        super(message);
+    }
 }
