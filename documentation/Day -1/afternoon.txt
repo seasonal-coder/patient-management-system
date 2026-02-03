@@ -1,0 +1,31 @@
+implemented this create-patient rest end point
+-always remeber its cotroller duty to send the filed values and validate among them
+-@Valid, @RequestBody have to pass as Arg to controller
+
+when any validation got voilated its give a big ass terminal lines to handle this we have to write exception class
+to write the exceptions
+-- create a global exception handler (name is enough to be descrptiev)
+use @ControllerAdvice to mark this as exception handler
+
+approach - we have to write the @ExceptionHandler(---exception method---.class) this binds with the error with the
+mrthod that is about to deal
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex){
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(errors);
+    }
+}
+
+here we can see that return type is RE<> it has map inside -- two fields what thoes??
+from the exception which we passed in the arg have all the deatils we have to explictly pick the imp stuff
+so from exception ex we pick --error field, error default messgae
+
+and return the RE, which have the errors, where here error is a map of key as error filed name and value as default messafe in the body
+
+and the errors can have multiple so we gonna loop them we using streams to handle in one line.

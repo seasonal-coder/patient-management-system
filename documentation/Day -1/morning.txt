@@ -1,0 +1,34 @@
+# Day 01 Morning– Patient Read API
+
+## Goal
+Build a clean GET /patients API using proper Spring layering.
+
+## What I implemented
+- Patient entity with UUID primary key
+- Repository per entity pattern
+- Service layer with constructor-based DI
+- Controller returning DTOs (not entities)
+- Mapper to isolate persistence from API
+- H2 in-memory DB for local development
+
+## Problems faced
+- 500 error due to missing dependency injection
+- NullPointerException from @NoArgsConstructor on service
+- UUID + IDENTITY not supported by H2
+- Mapper bug causing null email in response
+
+## Fixes & Learnings
+- Always use constructor injection for Spring beans
+- Never use @NoArgsConstructor on services/controllers*******imp*****
+- UUIDs should be generated in Java, not DB
+- Mapper bugs don’t throw errors but break APIs silently *********imp****
+
+## Result
+- GET /patients returns 200 OK
+- Clean, layered architecture
+- Stable checkpoint committed
+
+## Next
+- Add POST /patients
+- Input validation
+- Global exception handling
