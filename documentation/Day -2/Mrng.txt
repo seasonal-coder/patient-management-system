@@ -9,3 +9,15 @@ so in the servce layer before creating a newPatient we have to check if this ema
 for that we can use JpaRepository -- this guys writes code for us
 
 now to use our friend we have to mention the methodi in the impl classS
+--------------------------------------------------------------------------
+
+
+just done with the update -- put method
+1. first we have to use id as the PK,then check for exist or not if not error,,
+2. the filds in incoming dto should be valid-- means all fields are needed to properly there or else notvalid exception
+3. the arg for update are two 1. id to distuning 2. the new patient fiedl values that need to be updated..
+4. we have to pass all fields or exception will thrown
+
+
+-- had to use two execeptions 1. patient not exist with id, 2. if the email is same then email aready exist exception
+---------------------------------------------------------------------------------------------
